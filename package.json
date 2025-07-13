@@ -1,0 +1,28 @@
+{
+  "name": "dotcn",
+  "version": "0.0.1-alpha",
+  "private": true,
+  "description": "Simple CLI tool to install shadcn compatible components from various ui-libraries such as magic-ui, aceternity-ui or kibo-ui",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown --watch"
+  },
+  "devDependencies": {
+    "tsdown": "latest"
+  },
+  "dependencies": {
+    "commander": "^14.0.0",
+    "execa": "^9.6.0",
+    "prompts": "^2.4.2"
+  }
+}
