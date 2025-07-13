@@ -2,7 +2,7 @@
   "name": "dotcn",
   "version": "0.0.1-alpha",
   "private": true,
-  "description": "Simple CLI tool to install shadcn compatible components from various ui-libraries such as magic-ui, aceternity-ui or kibo-ui",
+  "description": "Simple CLI tool to install shadcn compatible components from various ui-libraries such as magic-ui, aceternity-ui or hexta-ui",
   "type": "module",
   "files": [
     "dist"
