@@ -5,7 +5,7 @@ import type { RegistriesSchema } from "@/schema";
 import { checkFileExists, readRegistry, writeToFile } from "@/utils";
 import { highlighter, logger } from "@/utils/highlighter";
 
-import { runInit } from "./init";
+import { runInit } from "../init";
 
 export const addCmd = new Command("add");
 addCmd

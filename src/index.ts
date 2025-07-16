@@ -2,7 +2,9 @@ import { Command } from "commander";
 
 import packageJson from "../package.json" with { type: "json" };
 import { add } from "./commands/add";
+import { initCmd } from "./commands/init";
 import { registry } from "./commands/registries";
+import { logger } from "./utils/highlighter";
 
 const program = new Command();
 
@@ -19,5 +21,14 @@ program
   );
 
 program.addCommand(registry);
+program.addCommand(initCmd);
 program.addCommand(add);
 program.parse();
+process.on("uncaughtException", (error) => {
+  if (error instanceof Error) {
+    logger.error("Operation Cancelled ❌");
+  } else {
+    // Rethrow unknown errors
+    throw error;
+  }
+});

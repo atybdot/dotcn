@@ -15,17 +15,16 @@ initCmd
     "the working directory. defaults to the current directory.",
     process.cwd()
   )
-  .option("-d, --default", "mark this registry as default", false)
   .action(async (opts) => {
     const basePath = path.resolve(opts.cwd);
     const registryPath = path.resolve(basePath, FILE_NAME);
 
     const passPreflight = await runPreflight({ basePath });
     if (!passPreflight) {
-      logger.error(highlighter.bold("program aborted!!!"));
+      logger.error("program aborted!!!");
       process.exit(1);
     }
-    await runInit({ cwd: registryPath, assure: false, changeDefault: false });
+    await runInit({ cwd: registryPath, assure: true, changeDefault: false });
   });
 
 interface Props {
@@ -48,7 +47,9 @@ export async function runInit({
   };
 
   if (checkRegistry) {
-    logger.info(`${FILE_NAME} already present.`);
+    logger.success(
+      `${highlighter.underline(highlighter.info(FILE_NAME))} already present.`
+    );
     logger.log(
       `run ${highlighter.warn(highlighter.underline("npx dotcn add button"))}`
     );
@@ -61,8 +62,10 @@ export async function runInit({
     });
     if (!reassure) {
       logger.error(
-        `Cannot continue without creating ${highlighter.info(FILE_NAME)}`,
-        highlighter.bold("Program aborted")
+        `Cannot continue without creating ${highlighter.underline(
+          highlighter.warn(FILE_NAME)
+        )}`,
+        "\n❌ Program aborted"
       );
       process.exit(1);
     }
@@ -78,7 +81,9 @@ export async function runInit({
     return;
   }
   logger.success(
-    `successfully added ${props?.data ? props.data.name : defaultValues.name} registry.`
+    `successfully added ${
+      props?.data ? props.data.name : defaultValues.name
+    } registry.`
   );
   logger.log(
     props?.customLog

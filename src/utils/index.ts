@@ -1,14 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
+import { confirm } from "@inquirer/prompts";
 import { execa, type Options, type ResultPromise } from "execa";
 import { z } from "zod/v4";
 import { FILE_NAME } from "@/constants";
 import { registriesSchema } from "@/schema";
 import { highlighter, logger } from "./highlighter";
-export function checkFileExists(absoluteFilePath: string): boolean {
+export function checkFileExists(
+  absoluteFilePath: string,
+  silent = false
+): boolean {
   const absPath = path.join(absoluteFilePath);
   const fileExists = fs.existsSync(absPath);
-  if (!fileExists) {
+  if (!fileExists && silent) {
     logger.error(`unable to find ${highlighter.bold(absoluteFilePath)}`);
   }
   return fileExists;
@@ -24,26 +28,49 @@ export function readRegistry(cwd?: string) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       logger.error(
-        "registries.json is not in correct format, please make sure that it has correct schema"
+        "❌",
+        FILE_NAME,
+        "is not in correct format, please make sure that it has correct schema"
       );
     } else if (error instanceof Error) {
       logger.error(
-        "unable to read registry file\nensure that registries.json is present along with components.json\n",
-        error?.message
+        `❌ unable to read registry file\nEnsure that ${highlighter.underline(
+          highlighter.warn(FILE_NAME)
+        )} is present along with components.json`
       );
+      logger.info(
+        `Run ${highlighter.underline(
+          highlighter.warn("npx dotcn@latest init")
+        )}\nBefore running this command`
+      );
+      logger.error(error?.message);
     }
     process.exit(1);
   }
 }
 
-export function returnUrl(key: string) {
+export async function returnUrl(key: string, useDefault?: boolean) {
   const values = readRegistry();
   const res = values.registries?.find((item) => item.name === key);
-  if (!res || res === undefined) {
-    logger.warn(`${key} not found in ${FILE_NAME}\nusing default registry.`);
+  if (res) {
+    return res?.url;
+  }
+  logger.warn(`${key} not found in ${FILE_NAME}\n`);
+  if (useDefault) {
     return values.default.url;
   }
-  return res?.url;
+  const confirmDefault = await confirm({
+    message: "Do you want to use default registry?: ",
+  });
+  if (!confirmDefault) {
+    logger.error(
+      `❌ ${highlighter.underline(
+        key
+      )} does not exsits in ${highlighter.underline(FILE_NAME)}`
+    );
+    process.exit(1);
+  }
+  return values.default.url;
 }
 
 export function runCommand(
