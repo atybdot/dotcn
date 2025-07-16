@@ -1,0 +1,11 @@
+import { Command } from "commander";
+import { addCmd } from "./add";
+import { initCmd } from "./init";
+import { markDefaultCmd } from "./mark-default";
+import { removeCmd } from "./remove";
+export const registry = new Command();
+registry.name("registries").description("manage registries");
+registry.addCommand(initCmd);
+registry.addCommand(addCmd);
+registry.addCommand(removeCmd);
+registry.addCommand(markDefaultCmd);
