@@ -2,8 +2,11 @@
   "name": "dotcn",
   "version": "0.0.1-alpha",
   "private": true,
-  "description": "Simple CLI tool to install shadcn compatible components from various ui-libraries such as magic-ui, aceternity-ui or hexta-ui",
+  "description": "Simple CLI tool to install shadcn compatible components from various ui-libraries such as magic-ui, aceternity-ui or hexta-ui etc..",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist"
   ],
@@ -12,6 +15,36 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js"
+  },
+  "bin": {
+    "dotcn": "dist/index.js"
+  },
+  "homepage": "https://github.com/atybdot/dotcn",
+  "author": {
+    "name": "@atybdot",
+    "url": "https://x.com/atybdot"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atybdot/dotcn.git"
+  },
+  "keywords": [
+    "shadcn",
+    "ui",
+    "manager",
+    "nodejs",
+    "cli",
+    "components",
+    "radix-ui",
+    "magic-ui",
+    "aceternity-ui",
+    "libraries",
+    "shadcn-ui",
+    "react"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/atybdot/dotcn/issues/new/choose"
   },
   "scripts": {
     "build": "tsdown",
