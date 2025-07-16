@@ -27,7 +27,7 @@ jobs:
           version: 8
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Ensure Biome is configured
         run: pnpm dlx @biomejs/biome --version
