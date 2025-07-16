@@ -13,13 +13,17 @@
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "bracketSameLine":true,
-    "bracketSpacing":true
+    "bracketSameLine": true,
+    "bracketSpacing": true
   },
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noExplicitAny": "info",
+        "noConsole": "off"
+      }
     }
   },
   "javascript": {
@@ -34,5 +38,6 @@
         "organizeImports": "on"
       }
     }
-  }
+  },
+  "extends": ["ultracite"]
 }
