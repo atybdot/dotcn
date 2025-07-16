@@ -41,6 +41,5 @@
         "organizeImports": "on"
       }
     }
-  },
-  "extends": ["ultracite"]
+  }
 }

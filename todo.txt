@@ -1,0 +1,3 @@
+- add search command 
+    where users can directly search some famous registries such as magic-ui, kib-ui, hexta-ui etc...
+- refactor to make it more developer friendly and clean up some mess
