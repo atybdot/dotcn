@@ -2,6 +2,7 @@ import { Command } from "commander";
 
 import packageJson from "../package.json" with { type: "json" };
 import { add } from "./commands/add";
+import { initCmd } from "./commands/init";
 import { registry } from "./commands/registries";
 
 const program = new Command();
@@ -19,5 +20,6 @@ program
   );
 
 program.addCommand(registry);
+program.addCommand(initCmd);
 program.addCommand(add);
 program.parse();
