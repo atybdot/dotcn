@@ -24,9 +24,9 @@ program.addCommand(registry);
 program.addCommand(initCmd);
 program.addCommand(add);
 program.parse();
-process.on('uncaughtException', (error) => {
+process.on("uncaughtException", (error) => {
   if (error instanceof Error) {
-    logger.error('Operation Cancelled ❌');
+    logger.error("Operation Cancelled ❌");
   } else {
     // Rethrow unknown errors
     throw error;
