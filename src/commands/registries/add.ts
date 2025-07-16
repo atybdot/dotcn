@@ -29,7 +29,7 @@ addCmd
       new URL(url);
     } catch (_e) {
       logger.error(
-        "Unable to validate URL\n provide correct URL for ",
+        "Unable to validate URL\n provide correct URL for",
         highlighter.bold(name)
       );
       process.exit(1);

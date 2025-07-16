@@ -2,9 +2,10 @@ name: Publish to npm
 
 on:
   push:
+    tags:
+      - "release-*"
     branches:
       - main
-      - master
   workflow_dispatch:
 
 jobs:
@@ -28,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Set up Biome (required by Ultracite)
+      - name: Ensure Biome is configured
         run: pnpm dlx @biomejs/biome --version
 
       - name: Run linter
