@@ -18,9 +18,13 @@ export const highlighter = {
   underline: (...s: string[]) => underline(s.join(" ")),
 };
 export const logger = {
-  error: (...s: string[]) => console.log(redBright(s.join(" "))),
-  warn: (...s: string[]) => console.log(yellowBright(s.join(" "))),
-  info: (...s: string[]) => console.log(blueBright(s.join(" "))),
-  success: (...s: string[]) => console.log(greenBright(s.join(" "))),
-  log: (...s: string[]) => console.log(s.join(" ")),
+  error: (...s: string[]) =>
+    console.log(redBright(highlighter.bold(s.join(" ")))),
+  warn: (...s: string[]) =>
+    console.log(yellowBright(highlighter.bold(s.join(" ")))),
+  info: (...s: string[]) =>
+    console.log(blueBright(highlighter.bold(s.join(" ")))),
+  success: (...s: string[]) =>
+    console.log(greenBright(highlighter.bold(s.join(" ")))),
+  log: (...s: string[]) => console.log(highlighter.bold(s.join(" "))),
 };
