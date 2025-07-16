@@ -5,10 +5,13 @@ import { z } from "zod/v4";
 import { FILE_NAME } from "@/constants";
 import { registriesSchema } from "@/schema";
 import { highlighter, logger } from "./highlighter";
-export function checkFileExists(absoluteFilePath: string): boolean {
+export function checkFileExists(
+  absoluteFilePath: string,
+  silent = false
+): boolean {
   const absPath = path.join(absoluteFilePath);
   const fileExists = fs.existsSync(absPath);
-  if (!fileExists) {
+  if (!fileExists && silent) {
     logger.error(`unable to find ${highlighter.bold(absoluteFilePath)}`);
   }
   return fileExists;
