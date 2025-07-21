@@ -1,7 +1,7 @@
 import { Command } from "commander";
 
 import packageJson from "../package.json" with { type: "json" };
-import { add } from "./commands/add";
+import { add } from "./commands/components/add";
 import { initCmd } from "./commands/init";
 import { registry } from "./commands/registries";
 import { logger } from "./utils/highlighter";
